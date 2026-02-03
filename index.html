@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Kausazko Perpausak</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);font-family:'Segoe UI',system-ui,sans-serif;color:#e8e8e8;padding:15px}
+#app{max-width:850px;margin:0 auto}
+h1{font-size:2.2rem;font-weight:800;background:linear-gradient(90deg,#f39c12,#e74c3c,#9b59b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:8px}
+.sub{text-align:center;color:#a0a0a0;margin-bottom:25px;font-size:1.05rem}
+.card{background:rgba(255,255,255,0.03);border-radius:18px;padding:25px;margin-bottom:20px;border:1px solid rgba(255,255,255,0.08)}
+.badge{display:inline-block;padding:5px 13px;border-radius:18px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;color:#fff}
+.b-lako{background:linear-gradient(135deg,#3498db,#2980b9)}
+.b-laeta{background:linear-gradient(135deg,#9b59b6,#8e44ad)}
+.b-eta{background:linear-gradient(135deg,#2ecc71,#27ae60)}
+.b-bait{background:linear-gradient(135deg,#e74c3c,#c0392b)}
+.q{font-size:1.12rem;line-height:1.7;margin-bottom:18px}
+.blank{border-bottom:3px dashed #f39c12;padding:2px 8px;color:#f39c12;font-weight:600}
+input[type=text]{width:100%;padding:13px 18px;font-size:1.05rem;border:2px solid rgba(255,255,255,0.1);border-radius:11px;background:rgba(0,0,0,0.3);color:#fff;outline:none;margin-bottom:12px;transition:.3s}
+input:focus{border-color:#f39c12;box-shadow:0 0 18px rgba(243,156,18,0.2)}
+input:disabled{opacity:.5}
+.brow{display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:11px 24px;border:none;border-radius:10px;font-size:.95rem;font-weight:600;cursor:pointer;transition:.3s}
+.btn:hover{transform:translateY(-2px)}
+.btn-p{background:linear-gradient(135deg,#f39c12,#e67e22);color:#fff}
+.btn-s{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2)}
+.btn-g{background:linear-gradient(135deg,#2ecc71,#27ae60);color:#fff}
+.btn:disabled{opacity:.4;cursor:default;transform:none}
+.nav{display:flex;justify-content:center;gap:12px;margin-bottom:25px;flex-wrap:wrap}
+.nav .btn{padding:10px 20px;border-radius:25px;text-transform:uppercase;letter-spacing:1px;font-size:.85rem}
+.nav .on{background:linear-gradient(135deg,#f39c12,#e74c3c);color:#fff;box-shadow:0 4px 18px rgba(243,156,18,0.35)}
+.pbar{width:100%;height:7px;background:rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;margin-bottom:25px}
+.pfill{height:100%;background:linear-gradient(90deg,#f39c12,#e74c3c);transition:width .4s}
+.fb{padding:18px;border-radius:11px;margin-top:16px;font-size:.95rem;line-height:1.6}
+.fb-ok{background:rgba(46,204,113,0.13);border:1px solid rgba(46,204,113,0.3);color:#2ecc71}
+.fb-no{background:rgba(231,76,60,0.13);border:1px solid rgba(231,76,60,0.3);color:#e74c3c}
+.help{background:rgba(52,152,219,0.1);border:1px solid rgba(52,152,219,0.3);border-radius:10px;padding:13px;margin-top:13px;font-size:.88rem;color:#3498db;display:none}
+.help.show{display:block}
+.sn{font-size:3.5rem;font-weight:800;background:linear-gradient(90deg,#f39c12,#e74c3c);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ei{padding:10px 14px;border-radius:8px;margin-bottom:6px;font-size:.9rem;display:flex;gap:10px}
+.ei-ok{background:rgba(46,204,113,0.08);border-left:3px solid #2ecc71}
+.ei-no{background:rgba(231,76,60,0.08);border-left:3px solid #e74c3c}
+.strike{text-decoration:line-through;color:#888;font-style:italic}
+table{width:100%;border-collapse:separate;border-spacing:0}
+th{background:rgba(243,156,18,0.18);padding:10px 12px;text-align:left;font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid rgba(243,156,18,0.25)}
+td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:.88rem}
+.tsec{margin-bottom:20px}
+.tsec h3{color:#f39c12;margin-bottom:8px;font-size:1rem}
+.rbox{background:rgba(243,156,18,0.08);border:1px solid rgba(243,156,18,0.25);border-radius:10px;padding:14px;margin-top:18px;color:#f39c12;font-size:.9rem;line-height:1.7}
+.ebox{background:rgba(231,76,60,0.08);border:1px solid rgba(231,76,60,0.25);border-radius:12px;padding:18px;margin-bottom:15px}
+.ebox h4{color:#e74c3c;margin-bottom:8px}
+.ebox .rl{color:#3498db;font-size:.86rem;margin-bottom:10px;padding:8px;background:rgba(52,152,219,0.1);border-radius:6px}
+.ebox .mk{color:#a0a0a0;font-size:.86rem;margin-bottom:4px}
+.obox{background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.25);border-radius:12px;padding:18px;margin-bottom:15px;color:#2ecc71}
+.ctr{text-align:center}
+.emoji{font-size:3rem;margin-bottom:15px}
+.prev-wrong{color:#e74c3c;font-size:.88rem;margin-bottom:10px;padding:8px;background:rgba(231,76,60,0.08);border-radius:6px}
+@media(max-width:600px){h1{font-size:1.6rem}.card{padding:16px}.btn{padding:9px 16px;font-size:.85rem}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script src="data.js"></script>
+<script>
+let S={scr:'sarrera',tipo:'',ex:[],idx:0,ans:'',fb:null,helpOn:false,
+  res:[],corr:[],ci:0,ca:{},cres:[],allRes:[]};
+
+const $=s=>document.getElementById(s),A=()=>$('app');
+function shuf(a){let c=[...a];for(let i=c.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[c[i],c[j]]=[c[j],c[i]]}return c}
+function norm(t){return t.toLowerCase().trim().replace(/\s+/g,' ').replace(/[.,;:!?¿¡]/g,'').replace(/\u00AD/g,'').normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+function bc(m){
+  if(m.includes('lako'))return'b-lako';
+  if(m.includes('la-eta'))return'b-laeta';
+  if(m==='-eta'||m.includes('-eta'))return'b-eta';
+  if(m.includes('bait'))return'b-bait';
+  return'b-lako';
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+
+function R(){
+  ({sarrera:rS,fusioa:rE,posizioa:rE,taula:rT,emaitzak:rM,zuzenketa:rC,txostena:rX}[S.scr]||rS)();
+  window.scrollTo(0,0);
+}
+
+// === SARRERA ===
+function rS(){
+  A().innerHTML=`<h1>Kausazko Perpausak</h1><p class="sub">Ikasketa-bidaia: Salou · Port Aventura · Barcelona · Pirinioak 🏖️🎢</p>
+  <div class="card ctr"><div class="emoji">🏖️ 🎢 🏔️</div>
+  <h2 style="font-size:1.6rem;margin-bottom:18px">Salou · Port Aventura · Barcelona</h2>
+  <p style="color:#a0a0a0;line-height:1.7;margin-bottom:25px">Kausazko menderagailuak landuko ditugu:
+  <b style="color:#3498db">-(e)lako</b>, <b style="color:#9b59b6">-(e)la-eta</b>,
+  <b style="color:#2ecc71">-eta</b> eta <b style="color:#e74c3c">bait-</b>.</p>
+  <div class="brow" style="justify-content:center">
+    <button class="btn btn-p" style="padding:14px 35px;font-size:1.05rem" onclick="go('fusioa')">🚀 Fusioa</button>
+    <button class="btn btn-s" onclick="go('posizioa')">📍 Posizioa</button>
+  </div>
+  <div style="margin-top:15px"><button class="btn btn-s" onclick="S.scr='taula';R()">📋 Fusio-taula</button></div></div>
+  <div class="card"><div class="rbox"><b>📌 Arau nagusiak:</b><br><br>
+  <b>-(e)lako / -(e)la-eta:</b> Bokalez → -la-; kontsonantez → -ela-<br>
+  <b>-eta:</b> Zuzenean gehitu (da-eta, du-eta...)<br>
+  <b>bait-:</b> T+D→T (baita), T+G→K (baikara), T+Z→TZ (baitzara), T+N→N (bainaiz)<br><br>
+  <b>📍 Posizioa:</b> -(e)la-eta AURRETIK · -(e)lako, -eta, bait- ATZETIK</div></div>`;
+}
+
+function go(t){
+  S.tipo=t;S.scr=t;S.ex=shuf(t==='fusioa'?[...FUSIOA]:[...POSIZIOA]);
+  S.idx=0;S.ans='';S.fb=null;S.helpOn=false;S.res=[];R();
+}
+
+// === ARIKETAK ===
+function rE(){
+  let e=S.ex[S.idx],pr=S.idx/S.ex.length*100,isF=S.tipo==='fusioa';
+  let nav=`<div class="nav">
+    <button class="btn ${S.tipo==='fusioa'?'on':'btn-s'}" onclick="go('fusioa')">Fusioa</button>
+    <button class="btn ${S.tipo==='posizioa'?'on':'btn-s'}" onclick="go('posizioa')">Posizioa</button>
+    <button class="btn btn-s" onclick="S.scr='taula';R()">📋 Taula</button></div>`;
+  let qH;
+  if(isF){
+    let p=e.p.split('_____');
+    qH=`<p class="q">${p[0]}<span class="blank">${esc(S.ans)||'?'}</span>${p[1]||''}</p>`;
+  }else{
+    qH=`<p class="q"><b>Perpaus nagusia:</b> ${e.pn}<br>
+    <b>Perpaus mendekoa:</b> ${e.pm}<br>
+    <b>Posizioa:</b> <span style="color:#f39c12">${e.pos}</span></p>`;
+  }
+  let fbH=S.fb?`<div class="fb ${S.fb.ok?'fb-ok':'fb-no'}"><b>${S.fb.msg}</b><br><span style="opacity:.8;font-size:.88rem">${isF?e.l:e.az}</span></div>`:'';
+  let hlp=`<div class="help ${S.helpOn&&!S.fb?'show':''}">\u{1F4A1} ${isF?e.l:e.az}</div>`;
+  let bH;
+  if(!S.fb){bH=`<div class="brow"><button class="btn btn-p" onclick="chk()" ${!S.ans.trim()?'disabled':''}>✓ Egiaztatu</button>
+    <button class="btn btn-s" onclick="tglH()">💡 Laguntza</button></div>`}
+  else{let lb=S.idx<S.ex.length-1?'→ Hurrengoa':'🏁 Amaitu';
+    bH=`<div class="brow"><button class="btn btn-p" onclick="nxt()">${lb}</button></div>`}
+  A().innerHTML=`<h1>${isF?'Fusioa':'Posizioa'}</h1>
+  <p class="sub">Ariketa ${S.idx+1} / ${S.ex.length}</p>${nav}
+  <div class="pbar"><div class="pfill" style="width:${pr}%"></div></div>
+  <div class="card"><span class="badge ${bc(e.m)}">${e.m}</span>${qH}
+  <input type="text" id="ai" value="${esc(S.ans)}" oninput="oI(this)" onkeydown="oK(event)" placeholder="${isF?'Idatzi fusioa...':'Idatzi perpausa osoa...'}" ${S.fb?'disabled':''}>
+  ${bH}${hlp}${fbH}</div>
+  <p class="ctr" style="color:#666;margin-top:15px">Puntuazioa: ${S.res.filter(r=>r.ok).length}/${S.res.length}</p>`;
+  if(!S.fb){let i=$('ai');if(i)i.focus()}
+}
+function oI(el){S.ans=el.value;let b=document.querySelector('.blank');if(b)b.textContent=S.ans||'?';
+  let bt=document.querySelector('.btn-p');if(bt&&!S.fb)bt.disabled=!S.ans.trim()}
+function oK(ev){if(ev.key==='Enter'&&!S.fb&&S.ans.trim())chk()}
+function tglH(){S.helpOn=!S.helpOn;let h=document.querySelector('.help');if(h)h.classList.toggle('show')}
+
+function chk(){
+  if(!S.ans.trim()||S.fb)return;
+  let e=S.ex[S.idx],cor=e.e||e.ok,ok=norm(S.ans)===norm(cor);
+  S.fb={ok,msg:ok?'🎉 Bikain! Ondo egin duzu!':`❌ Ez da zuzena. Erantzun zuzena: "${cor}"`};
+  S.res.push({ex:e,given:S.ans,correct:cor,ok,k:e.k});R();
+}
+function nxt(){
+  if(S.idx<S.ex.length-1){S.idx++;S.ans='';S.fb=null;S.helpOn=false;R()}
+  else{S.allRes=[...S.res];S.scr='emaitzak';R()}
+}
+
+// === EMAITZAK ===
+function rM(){
+  let t=S.res.length,ok=S.res.filter(r=>r.ok).length,p=t?Math.round(ok/t*100):0;
+  let em=p>=90?'🏆':p>=70?'👍':p>=50?'💪':'📚';
+  let ms=p>=90?'Bikain! Menderagailuak menperatuta!':p>=70?'Oso ondo! Baina erreparatu akatsei.':p>=50?'Ondo, baina praktikatu behar duzu oraindik.':'Segi lanean! Fusio-taula berrikusi.';
+  let wr=S.res.filter(r=>!r.ok);
+  let li=S.res.map((r,i)=>{
+    let lb=S.tipo==='fusioa'?(r.ex.p.split('_____')[0]||'').substring(0,42):(r.ex.pn||'').substring(0,42);
+    if(r.ok)return`<div class="ei ei-ok">🟢 <span><b>${i+1}.</b> ${lb}... → "${esc(r.given)}" ✓</span></div>`;
+    return`<div class="ei ei-no">🔴 <span><b>${i+1}.</b> ${lb}...<br>Zuk: <span class="strike">${esc(r.given)}</span> | Zuzena: <b>${r.correct}</b></span></div>`;
+  }).join('');
+  let cb=wr.length?`<button class="btn btn-g" onclick="goCorr()">🔄 Akatsak zuzendu (${wr.length})</button>`:'';
+  A().innerHTML=`<h1>Emaitzak</h1><div class="card ctr"><div class="emoji">${em}</div>
+  <div class="sn">${p}%</div><p style="font-size:1.2rem;color:#a0a0a0;margin:8px 0">${ok} / ${t} zuzen</p>
+  <p style="color:#666;margin-bottom:25px">${ms}</p>
+  <div class="brow" style="justify-content:center;gap:10px">
+  ${cb}<button class="btn btn-p" onclick="go(S.tipo)">🔁 Berriz hasi</button>
+  <button class="btn btn-s" onclick="S.scr='txostena';R()">📋 Errore-txostena</button>
+  <button class="btn btn-s" onclick="S.scr='sarrera';R()">🏠 Hasierara</button></div></div>
+  <div class="card"><h3 style="color:#f39c12;margin-bottom:12px">Ariketa guztien laburpena</h3><div>${li}</div></div>`;
+}
+
+// === AKATSAK ZUZENDU ===
+function goCorr(){
+  S.corr=shuf(S.allRes.filter(r=>!r.ok).map(r=>({...r,prev:[r.given]})));
+  S.ci=0;S.ca={};S.cres=[];S.corr.forEach((_,i)=>S.ca[i]=0);
+  S.ans='';S.fb=null;S.helpOn=false;S.scr='zuzenketa';R();
+}
+function rC(){
+  if(S.ci>=S.corr.length){S.cres.forEach(cr=>{let i=S.allRes.findIndex(r=>r.ex===cr.ex&&!r.ok);if(i>=0){S.allRes[i].ok=cr.ok;S.allRes[i].given=cr.given}});S.res=S.allRes;S.scr='emaitzak';R();return}
+  let c=S.corr[S.ci],e=c.ex,at=S.ca[S.ci]||0,pr=S.ci/S.corr.length*100;
+  let isF=S.tipo==='fusioa';
+  let prevH=c.prev.map(w=>`<span class="strike">${esc(w)}</span>`).join(', ');
+  let qH;
+  if(isF){let p=e.p.split('_____');qH=`<p class="q">${p[0]}<span class="blank">${esc(S.ans)||'?'}</span>${p[1]||''}</p>`}
+  else{qH=`<p class="q"><b>Perpaus nagusia:</b> ${e.pn}<br><b>Perpaus mendekoa:</b> ${e.pm}<br><b>Posizioa:</b> <span style="color:#f39c12">${e.pos}</span></p>`}
+  let fbH=S.fb?`<div class="fb ${S.fb.ok?'fb-ok':'fb-no'}"><b>${S.fb.msg}</b><br><span style="opacity:.8;font-size:.88rem">${isF?e.l:e.az}</span></div>`:'';
+  let hlp=`<div class="help ${S.helpOn&&!S.fb?'show':''}">💡 ${isF?e.l:e.az}</div>`;
+  let bH;
+  if(!S.fb){bH=`<div class="brow"><button class="btn btn-p" onclick="chkC()" ${!S.ans.trim()?'disabled':''}>✓ Egiaztatu</button>
+    <button class="btn btn-s" onclick="tglH()">💡 Laguntza</button></div>`}
+  else{let lb=S.ci<S.corr.length-1?'→ Hurrengoa':'🏁 Amaitu';
+    bH=`<div class="brow"><button class="btn btn-p" onclick="nxtC()">${lb}</button></div>`}
+  A().innerHTML=`<h1>🔄 Akatsak zuzentzen</h1>
+  <p class="sub">Ariketa ${S.ci+1} / ${S.corr.length} · Saiakera ${at+1}/3</p>
+  <div class="pbar"><div class="pfill" style="width:${pr}%"></div></div>
+  <div class="card"><span class="badge ${bc(e.m)}">${e.m}</span>
+  <div class="prev-wrong">Aurreko erantzunak: ${prevH}</div>${qH}
+  <input type="text" id="ai" value="${esc(S.ans)}" oninput="oI(this)" onkeydown="oKC(event)" placeholder="${isF?'Idatzi fusioa...':'Idatzi perpausa osoa...'}" ${S.fb?'disabled':''}>
+  ${bH}${hlp}${fbH}</div>`;
+  if(!S.fb){let i=$('ai');if(i)i.focus()}
+}
+function oKC(ev){if(ev.key==='Enter'&&!S.fb&&S.ans.trim())chkC()}
+function chkC(){
+  if(!S.ans.trim()||S.fb)return;
+  let c=S.corr[S.ci],e=c.ex,cor=e.e||e.ok;
+  let ok=norm(S.ans)===norm(cor);
+  S.ca[S.ci]=(S.ca[S.ci]||0)+1;
+  if(ok){
+    S.fb={ok:true,msg:'🎉 Orain bai! Ondo zuzenduta!'};
+    S.cres.push({ex:e,given:S.ans,correct:cor,ok:true,k:e.k});R();
+  }else if(S.ca[S.ci]>=3){
+    S.fb={ok:false,msg:`❌ 3 saiakera agortu dira. Zuzena: "${cor}"`};
+    S.cres.push({ex:e,given:S.ans,correct:cor,ok:false,k:e.k});R();
+  }else{
+    c.prev.push(S.ans);S.ans='';
+    let g=3-S.ca[S.ci];
+    let tmp=`<div class="fb fb-no"><b>❌ Ez da zuzena. Saiatu berriz! (${g} saiakera geratzen ${g===1?'da':'dira'})</b></div>`;
+    document.querySelector('.card').insertAdjacentHTML('beforeend',tmp);
+    setTimeout(()=>{S.fb=null;R()},2000);
+  }
+}
+function nxtC(){
+  if(S.ci<S.corr.length-1){S.ci++;S.ans='';S.fb=null;S.helpOn=false;R()}
+  else{S.cres.forEach(cr=>{let i=S.allRes.findIndex(r=>r.ex===cr.ex&&!r.ok);if(i>=0){S.allRes[i].ok=cr.ok;S.allRes[i].given=cr.given}});S.res=S.allRes;S.scr='emaitzak';R()}
+}
+
+// === TAULA ===
+function rT(){
+  let mk=(arr,col,extra)=>arr.map(r=>`<tr><td style="font-weight:700;color:#f39c12">${r[0]}</td><td style="color:${col}">${r[1]}</td>${extra&&r[2]?`<td style="color:#888;font-size:.82rem">${r[2]}</td>`:''}</tr>`).join('');
+  A().innerHTML=`<h1>Fusio-Taulak</h1><p class="sub">Laguntzailea + Menderagailua</p>
+  <div class="nav"><button class="btn btn-s" onclick="S.scr='sarrera';R()">← Itzuli</button>
+  <button class="btn on" onclick="go('fusioa')">Hasi ariketak</button></div>
+  <div class="card"><div class="tsec"><h3 style="color:#3498db">-(e)lako</h3>
+  <table><th>Laguntz.</th><th>+ -(e)lako</th>${mk(T_ELAKO,'#3498db')}</table></div></div>
+  <div class="card"><div class="tsec"><h3 style="color:#9b59b6">-(e)la-eta</h3>
+  <table><th>Laguntz.</th><th>+ -(e)la-eta</th>${mk(T_ELAETA,'#9b59b6')}</table></div></div>
+  <div class="card"><div class="tsec"><h3 style="color:#2ecc71">-eta</h3>
+  <table><th>Laguntz.</th><th>+ -eta</th>${mk(T_ETA,'#2ecc71')}</table></div></div>
+  <div class="card"><div class="tsec"><h3 style="color:#e74c3c">bait-</h3>
+  <table><th>Laguntz.</th><th>bait- +</th><th>Araua</th>${mk(T_BAIT,'#e74c3c',true)}</table></div></div>
+  <div class="card"><div class="rbox"><b>📌 Arauak:</b><br><br>
+  <b>-(e)lako / -(e)la-eta:</b> Bokalez → -la-; kontsonantez → -ela-<br>
+  <b>-eta:</b> Zuzenean gehitu<br>
+  <b>bait-:</b> T+D→T, T+G→K, T+Z→TZ, T+N→N</div>
+  <div class="rbox" style="margin-top:12px;background:rgba(231,76,60,0.08);border-color:rgba(231,76,60,0.25);color:#e74c3c">
+  <b>📍 Posizioa:</b><br>
+  <b>-(e)la-eta:</b> AURRETIK<br>
+  <b>-(e)lako, -eta, bait-:</b> ATZETIK</div></div>`;
+}
+
+// === ERRORE-TXOSTENA ===
+function rX(){
+  let all=S.allRes||S.res,t=all.length,ok=all.filter(r=>r.ok).length,p=t?Math.round(ok/t*100):0;
+  let wr=all.filter(r=>!r.ok),cats={};
+  wr.forEach(r=>{if(!cats[r.k])cats[r.k]=[];cats[r.k].push(r)});
+  let okList=[...new Set(all.filter(r=>r.ok).map(r=>r.k))].filter(k=>!cats[k]).map(k=>(ERRKATS[k]||{iz:k}).iz);
+  let eH='';
+  for(let k in cats){
+    let cat=ERRKATS[k]||{iz:k,ar:''};
+    let mks=cats[k].map(r=>`<div class="mk">• <span class="strike">${esc(r.given)}</span> → <b>${r.correct}</b></div>`).join('');
+    eH+=`<div class="ebox"><h4>⚠️ ${cat.iz}</h4><div class="rl"><b>Araua:</b> ${cat.ar}</div>${mks}</div>`;
+  }
+  let okH=okList.length?`<div class="obox"><b>✅ Dena zuzen egin duzu hauetan:</b><br>${okList.map(n=>'• '+n).join('<br>')}</div>`:'';
+  let dlB=wr.length?`<button class="btn btn-p" onclick="dl()">📥 Deskargatu txostena (.txt)</button>`:'';
+  A().innerHTML=`<h1>📋 Errore-txostena</h1>
+  <div class="card ctr"><div class="sn">${p}%</div><p style="color:#a0a0a0;margin:8px 0">${ok} / ${t} zuzen</p></div>
+  ${wr.length?`<div class="card"><h3 style="color:#e74c3c;margin-bottom:15px">⚠️ Erroreak eta nola ekidin</h3>${eH}${okH}</div>`
+  :`<div class="card ctr"><div class="emoji">🏆</div><p style="font-size:1.2rem">Zorionak! Ez duzu akatsik egin!</p></div>`}
+  <div class="card ctr"><div class="brow" style="justify-content:center">
+  ${dlB}<button class="btn btn-s" onclick="S.scr='sarrera';R()">🏠 Hasierara</button>
+  <button class="btn btn-s" onclick="go(S.tipo)">🔁 Berriz hasi</button></div></div>`;
+}
+
+// === DESKARGA ===
+function dl(){
+  let all=S.allRes||S.res,t=all.length,ok=all.filter(r=>r.ok).length,p=t?Math.round(ok/t*100):0;
+  let wr=all.filter(r=>!r.ok),cats={};
+  wr.forEach(r=>{if(!cats[r.k])cats[r.k]=[];cats[r.k].push(r)});
+  let okList=[...new Set(all.filter(r=>r.ok).map(r=>r.k))].filter(k=>!cats[k]).map(k=>(ERRKATS[k]||{iz:k}).iz);
+  let d=new Date(),ds=d.toLocaleDateString('eu-ES');
+  let txt=`========================================\nKAUSAZKO PERPAUSAK — ERRORE-TXOSTENA\nData: ${ds}\n========================================\n\nPUNTUAZIOA: ${ok}/${t} (${p}%)\n`;
+  txt+=`\n----------------------------------------\n⚠️ ERROREAK ETA NOLA EKIDIN\n----------------------------------------\n`;
+  let n=1;
+  for(let k in cats){
+    let cat=ERRKATS[k]||{iz:k,ar:''};
+    txt+=`\n${n}. ${cat.iz.toUpperCase()}\n   Araua: ${cat.ar}\n\n   Zure akatsak:\n`;
+    cats[k].forEach(r=>{txt+=`   - "${r.given}" → ${r.correct}\n`});n++;
+  }
+  if(okList.length){txt+=`\n----------------------------------------\nDENA ZUZEN EGIN DUZU HAUETAN:\n`;okList.forEach(n=>{txt+=`- ${n}\n`})}
+  txt+=`\n----------------------------------------\nSegi praktikatzen! 💪\n`;
+  let blob=new Blob([txt],{type:'text/plain;charset=utf-8'});
+  let a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download=`errore-txostena-kausazkoak_${ds.replace(/\//g,'-')}.txt`;a.click();
+}
+
+R();
+</script>
+</body>
+</html>
